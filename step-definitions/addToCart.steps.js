@@ -29,6 +29,26 @@ When('I click on the cart icon', async () => {
     await addToCartPage.clickCartIcon();
 });
 
+When('I add Multiple products to the cart', async () => {
+    await addToCartPage.clickLapBag();
+    await addToCartPage.clickLabsOnesie();
+    await addToCartPage.clickBoltTshirt();
+});
+
+When('I navigate to the cart page', async () => {
+    await addToCartPage.clickCartButton();
+});
+
+When('check the products in the cart', async () => {
+    const isDisplayed = await addToCartPage.isCartProductDisplayed();
+    expect(isDisplayed).toBe(true);
+});
+
+Then('I should see the badge number on the cart icon {string}', async (expectedBadgeNumber) => {
+    const badgeText = await addToCartPage.getBadgeNumberText();
+    expect(badgeText).toBe(expectedBadgeNumber);
+});
+
 When('I should see {string} in the carts', async (productName) => {
     const isDisplayed = await addToCartPage.isCartProductDisplayed();
     expect(isDisplayed).toBe(true);
