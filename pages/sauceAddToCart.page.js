@@ -9,6 +9,14 @@ class AddToCart {
         this.removeButton = "//button[contains(text(),'Remove')]";
         this.cartIcon = "//a[@data-test='shopping-cart-link']";
         this.cartProduct = "//a[@data-test='item-4-title-link']";
+        this.checkOutButton = "//button[contains(text(), 'Checkout')]";
+        this.firstName = "//input[@name='firstName']";
+        this.lastName = "//input[@name='lastName']";
+        this.pinCode = "//input[@name='postalCode']";
+        this.continueButton = "//input[@name='continue']";
+        this.textInPricePage = "//div[contains(text(), 'Price Total')]";
+        this.finishPurchase = "//button[contains(text(), 'Finish')]";
+        this.thankYouPage = "//h2[contains(text(), 'Thank you for your order!')]";
     }
 
     async enterUsername(username) {
@@ -49,7 +57,45 @@ class AddToCart {
 
     async isCartProductDisplayed() {
         return await $(this.cartProduct).isDisplayed();
-        console.log('Cart product displayed successfully');  }
+    }
+
+    async clickCheckoutButton() {
+        await $(this.checkOutButton).waitForClickable({ timeout: 5000 });
+        await $(this.checkOutButton).click();
+        console.log('Checkout button clicked');
+        return true;
+    }
+
+    async enterFirstName(firstName) {
+        await $(this.firstName).setValue(firstName);
+    }
+
+    async enterLastName(lastName) {
+        await $(this.lastName).setValue(lastName);
+    }
+
+    async enterPostalCode(pinCode) {
+        await $(this.pinCode).setValue(pinCode);
+    }
+
+    async clickContinueButton() {
+        await $(this.continueButton).click();
+        console.log('Continue button clicked');
+    }
+
+    async isPriceTotalDisplayed() {
+        return await $(this.textInPricePage).isDisplayed();
+    }
+
+    async clickFinishPurchase() {
+        await $(this.finishPurchase).click();
+        console.log('Finish purchase clicked');
+    }
+
+    async isThankYouPageDisplayed() {
+        await $(this.thankYouPage).waitForDisplayed({ timeout: 5000 });
+        return await $(this.thankYouPage).isDisplayed();
+    }
 }
 
 module.exports = new AddToCart();

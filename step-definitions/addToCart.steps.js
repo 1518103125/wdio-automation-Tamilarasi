@@ -29,7 +29,31 @@ When('I click on the cart icon', async () => {
     await addToCartPage.clickCartIcon();
 });
 
-Then('I should see {string} in the carts', async (productName) => {
+When('I should see {string} in the carts', async (productName) => {
     const isDisplayed = await addToCartPage.isCartProductDisplayed();
+    expect(isDisplayed).toBe(true);
+});
+
+When('I should see the checkout button', async () => {
+    const clicked = await addToCartPage.clickCheckoutButton();
+    expect(clicked).toBe(true);
+});
+
+When('I enter the first name as {string}, last name as {string} and postal code as {string}', async (firstName, lastName, postalCode) => {
+    await addToCartPage.enterFirstName(firstName);
+    await addToCartPage.enterLastName(lastName);
+    await addToCartPage.enterPostalCode(postalCode);
+});
+
+When('I click on the continue button', async () => {
+    await addToCartPage.clickContinueButton();
+});
+
+When('I click on the finish button', async () => {
+    await addToCartPage.clickFinishPurchase();
+});
+
+Then('I should see the message {string}', async (message) => {
+    const isDisplayed = await addToCartPage.isThankYouPageDisplayed();
     expect(isDisplayed).toBe(true);
 });
